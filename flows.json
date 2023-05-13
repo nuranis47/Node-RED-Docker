@@ -7,6 +7,14 @@
         "info": ""
     },
     {
+        "id": "e563884b9ff10c58",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "56fdd3dbaac6938a",
         "type": "inject",
         "z": "3af82246.3634ae",
@@ -69,5 +77,133 @@
                 "eb5b7aa501aa523d"
             ]
         ]
+    },
+    {
+        "id": "e36406f2.8ef798",
+        "type": "inject",
+        "z": "e563884b9ff10c58",
+        "name": "",
+        "repeat": "300",
+        "crontab": "",
+        "once": false,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "c3c50023.3bbed"
+            ]
+        ]
+    },
+    {
+        "id": "c3c50023.3bbed",
+        "type": "http request",
+        "z": "e563884b9ff10c58",
+        "name": "Recent Quakes",
+        "method": "GET",
+        "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.csv",
+        "tls": "",
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "8afc6cac.e0812"
+            ]
+        ]
+    },
+    {
+        "id": "8afc6cac.e0812",
+        "type": "csv",
+        "z": "e563884b9ff10c58",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "x": 490,
+        "y": 160,
+        "wires": [
+            [
+                "44779781.4190f8",
+                "6f0eb546.9e208c"
+            ]
+        ]
+    },
+    {
+        "id": "44779781.4190f8",
+        "type": "debug",
+        "z": "e563884b9ff10c58",
+        "name": "",
+        "active": true,
+        "complete": false,
+        "x": 650,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "6f0eb546.9e208c",
+        "type": "switch",
+        "z": "e563884b9ff10c58",
+        "name": "",
+        "property": "payload.mag",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "7",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 1,
+        "x": 530,
+        "y": 220,
+        "wires": [
+            [
+                "d78d4aa8.8c8208"
+            ]
+        ]
+    },
+    {
+        "id": "d78d4aa8.8c8208",
+        "type": "change",
+        "z": "e563884b9ff10c58",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "PANIC!",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 280,
+        "wires": [
+            [
+                "72fddece.fac0d"
+            ]
+        ]
+    },
+    {
+        "id": "72fddece.fac0d",
+        "type": "debug",
+        "z": "e563884b9ff10c58",
+        "name": "",
+        "active": true,
+        "complete": false,
+        "x": 770,
+        "y": 220,
+        "wires": []
     }
 ]
