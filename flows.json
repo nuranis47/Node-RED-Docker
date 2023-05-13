@@ -23,6 +23,14 @@
         "env": []
     },
     {
+        "id": "4aa69778a6673ddc",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "56fdd3dbaac6938a",
         "type": "inject",
         "z": "3af82246.3634ae",
@@ -333,5 +341,142 @@
                 "01e257e472d21122"
             ]
         ]
+    },
+    {
+        "id": "58a2ff176e208d1c",
+        "type": "inject",
+        "z": "4aa69778a6673ddc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "5f75a33c544ed6d5"
+            ]
+        ]
+    },
+    {
+        "id": "7bca734811081cbb",
+        "type": "http request",
+        "z": "4aa69778a6673ddc",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://ksppublic-stg.htpsmartsolution.com.my/api/GetParticularNew",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 630,
+        "y": 140,
+        "wires": [
+            [
+                "dc91ff12422d820d",
+                "ac115cf42c51a4a1"
+            ]
+        ]
+    },
+    {
+        "id": "dc91ff12422d820d",
+        "type": "debug",
+        "z": "4aa69778a6673ddc",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "5f75a33c544ed6d5",
+        "type": "function",
+        "z": "4aa69778a6673ddc",
+        "name": "function 2",
+        "func": "// Add the below if the data is in the URL\n//msg.headers = {\n//    'Content-Type': 'application/x-www-form-urlencoded'\n//};\n\n\nmsg.payload = {};\nmsg.payload = {\n    'phoneNo': '+60193577471'\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 320,
+        "wires": [
+            [
+                "7bca734811081cbb",
+                "dc91ff12422d820d"
+            ]
+        ]
+    },
+    {
+        "id": "41015be5d70da866",
+        "type": "http in",
+        "z": "4aa69778a6673ddc",
+        "name": "GetParticularNew",
+        "url": "/GetParticularNew",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 420,
+        "wires": [
+            [
+                "357df87fc18a1ea3"
+            ]
+        ]
+    },
+    {
+        "id": "357df87fc18a1ea3",
+        "type": "function",
+        "z": "4aa69778a6673ddc",
+        "name": "function 3",
+        "func": "msg.payload = msg.req.body;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 420,
+        "wires": [
+            [
+                "7bca734811081cbb"
+            ]
+        ]
+    },
+    {
+        "id": "ac115cf42c51a4a1",
+        "type": "http response",
+        "z": "4aa69778a6673ddc",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 890,
+        "y": 380,
+        "wires": []
     }
 ]
