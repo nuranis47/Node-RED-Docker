@@ -15,6 +15,14 @@
         "env": []
     },
     {
+        "id": "07375df286aa788c",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "56fdd3dbaac6938a",
         "type": "inject",
         "z": "3af82246.3634ae",
@@ -205,5 +213,125 @@
         "x": 770,
         "y": 220,
         "wires": []
+    },
+    {
+        "id": "c324ee0388eb83e5",
+        "type": "http in",
+        "z": "07375df286aa788c",
+        "name": "",
+        "url": "/test",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "ff414549d36fcf2f",
+                "cb55ba695a6bd156",
+                "5d1da53d4590d1d1",
+                "d1cd930c9607b5dc"
+            ]
+        ]
+    },
+    {
+        "id": "01e257e472d21122",
+        "type": "http response",
+        "z": "07375df286aa788c",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 970,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ff414549d36fcf2f",
+        "type": "function",
+        "z": "07375df286aa788c",
+        "name": "data from query string",
+        "func": "var payload = {}\n\nif (msg.payload.firstname != null) {\n    payload = { \"message\": \"Hello \" + msg.payload.firstname + \"!\"}\n\n} else {\n    payload = {\"message\" : \"Hello World!\"}\n}\nmsg.payload = payload;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 180,
+        "wires": [
+            [
+                "cb55ba695a6bd156"
+            ]
+        ]
+    },
+    {
+        "id": "cb55ba695a6bd156",
+        "type": "debug",
+        "z": "07375df286aa788c",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a00c68f302940602",
+        "type": "debug",
+        "z": "07375df286aa788c",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "5d1da53d4590d1d1",
+        "type": "function",
+        "z": "07375df286aa788c",
+        "name": "data from body",
+        "func": "msg.payload = msg.req.body.firstname;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 300,
+        "wires": [
+            [
+                "a00c68f302940602"
+            ]
+        ]
+    },
+    {
+        "id": "d1cd930c9607b5dc",
+        "type": "function",
+        "z": "07375df286aa788c",
+        "name": "return the request object",
+        "func": "msg.payload = msg.req.body;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "01e257e472d21122"
+            ]
+        ]
     }
 ]
