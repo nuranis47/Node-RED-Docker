@@ -31,7 +31,7 @@
         "y": 140,
         "wires": [
             [
-                "eb5b7aa501aa523d"
+                "13c108b2edcbd91c"
             ]
         ]
     },
@@ -50,5 +50,24 @@
         "x": 600,
         "y": 260,
         "wires": []
+    },
+    {
+        "id": "13c108b2edcbd91c",
+        "type": "function",
+        "z": "3af82246.3634ae",
+        "name": "function 1",
+        "func": "// Create a Date object from the payload\nvar date = new Date(msg.payload);\n// Change the payload to be a formatted Date string\nmsg.payload = date.toString();\n// Return the message so it can be sent on\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 320,
+        "wires": [
+            [
+                "eb5b7aa501aa523d"
+            ]
+        ]
     }
 ]
